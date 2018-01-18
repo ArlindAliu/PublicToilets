@@ -1,0 +1,24 @@
+Pods/
+.DS_Store
+
+## User settings
+xcuserdata/
+*.xcuserstate
+
+## Build generated
+build/
+DerivedData/
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.xcscheme
+
+########### OSX ###########
+# OS X temporary files that should never be committed
+
+.DS_Store
+.AppleDouble
+.LSOverride

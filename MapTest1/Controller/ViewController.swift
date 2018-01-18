@@ -45,11 +45,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
-        for x in i...(obj.locationArray.count - 1){
+        for index in 0...(obj.locationArray.count - 1){
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(obj.locationArray[x].latitude, obj.locationArray[x].longitude)
-        marker.title = "\(obj.locationArray[x].emri)"
-        marker.snippet = "\(obj.locationArray[x].tipi)"
+        marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
+        marker.title = "\(obj.locationArray[index].emri)"
+        marker.snippet = "\(obj.locationArray[index].tipi)"
         marker.map = mapView
         }
         

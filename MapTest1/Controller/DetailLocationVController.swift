@@ -28,11 +28,10 @@ class DetailLocationVController: UIViewController {
         pershkrimiLbl.text = obj?.pershkrimi
         overallRating.text = obj?.rating
         
-        scrollView.contentSize.equalTo(scrollView.frame.size)
+        scrollView.contentSize.height = viewHeight.intrinsicContentSize.height
+//        self.view.addSubview(scrollView)
+//        scrollView.contentSize = CGSize(width: 375, height: 370.5)
         
     }
-    
-   
-    
 
 }
