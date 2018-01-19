@@ -15,7 +15,7 @@ import SwiftyJSON
 
 //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)"&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: GMSMapView! 
@@ -51,10 +51,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         marker.title = "\(obj.locationArray[index].emri)"
         marker.snippet = "\(obj.locationArray[index].tipi)"
         marker.map = mapView
-        }
-        
+            
+//            if mapView(mapView, didTap: marker) = true {
+//                currentPlace?.distance(from: marker.position)
+//        }
     }
-    
+    }
     func getData(params: [String:Any]){
         Alamofire.request(url, method: .get, parameters: params).responseData { (data) in
             if data.result.isSuccess{
@@ -154,28 +156,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         if didTouched == false {
             
+            //mapView.clipsToBounds = true
             self.viewHeight.constant = self.view.bounds.height
             
             UIView.animate(withDuration: 0.7, animations: {
                 self.view.layoutIfNeeded()
             })
             didTouched = true
-//        } else {
-//            self.viewHeight.constant = 150
-//
-//            UIView.animate(withDuration: 0.7, animations: {
-//                self.view.layoutIfNeeded()
-//
-//            })
-//            didTouched = false
-//            }
+        } else {
+            self.viewHeight.constant = 150
+            //mapView.clipsToBounds = false
+            UIView.animate(withDuration: 0.7, animations: {
+                self.view.layoutIfNeeded()
+
+            })
+            didTouched = false
+            }
         
         }
         
-        }}}
-    
+        }}
 
-extension ViewController: CLLocationManagerDelegate , GMSMapViewDelegate{
+extension ViewController: CLLocationManagerDelegate {
          func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.first!
         print("Locations : \(location)")
@@ -189,6 +191,9 @@ extension ViewController: CLLocationManagerDelegate , GMSMapViewDelegate{
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: zoomLevel)
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
+        mapView.settings.accessibilityNavigationStyle = .combined
+//        mapView.accessibilityNavigationStyle =
+        
         
         if mapView.isHidden {
             mapView.isHidden = false

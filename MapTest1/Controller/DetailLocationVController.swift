@@ -28,10 +28,20 @@ class DetailLocationVController: UIViewController {
         pershkrimiLbl.text = obj?.pershkrimi
         overallRating.text = obj?.rating
         
-        scrollView.contentSize.height = viewHeight.intrinsicContentSize.height
+        
+//        scrollView.addSubview(viewHeight)
+//        scrollView.contentSize = viewHeight.bounds.size
+//        scrollView.contentOffset = CGPoint(x: 1000, y: 450)
 //        self.view.addSubview(scrollView)
 //        scrollView.contentSize = CGSize(width: 375, height: 370.5)
         
+    }
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
     }
 
 }
