@@ -17,6 +17,7 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate {
     
+    @IBOutlet weak var animateMap: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: GMSMapView! 
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
@@ -28,7 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var currentPlace : CLLocation?
     var zoomLevel : Float = 15;
     var obj = Locations()
-    var i = 0
     var didTouched: Bool = false
     let url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw"
 
@@ -74,7 +74,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
         
     }
-    
+     func mapView(_mapView: GMSMapView, didTap: GMSMarker)  {
+        
+        
+        
+    }
     
     func locationManager(manager: CLLocationManager,
                          didFailWithError error: NSError){
@@ -87,6 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             currentPlace = locationManager.location
             UserLocation.sharedInstance.latitude = currentPlace?.coordinate.latitude
             UserLocation.sharedInstance.longitude = currentPlace?.coordinate.longitude
+            
             locationManager.startUpdatingLocation()
         } else {
             locationManager.requestWhenInUseAuthorization()
@@ -96,7 +101,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        if status == .authorizedWhenInUse{
 //            mapView.camera = GMSCameraPosition.camera(withLatitude: UserLocation.sharedInstance.latitude, longitude: UserLocation.sharedInstance.longitude, zoom: zoomLevel)
 //        }
-//    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         statusAuthorize()
@@ -106,6 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "celliJon") as! LocationCell
          cell.mbusheListen(locations: obj.locationArray[indexPath.row])
+        tableView.rowHeight = 111
         
         return cell
     }
@@ -118,6 +124,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "detailsVC"{
             let detail = segue.destination as! DetailLocationVController
             detail.obj = sender as? LocationModel
+            
+            
         }
     }
     
@@ -157,14 +165,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if didTouched == false {
             
             //mapView.clipsToBounds = true
-            self.viewHeight.constant = self.view.bounds.height
             
+            self.viewHeight.constant = self.view.bounds.height
+            //self.animateMap.addSubview(mapView)
+           // mapView.frame.size.height = view.bounds.height
             UIView.animate(withDuration: 0.7, animations: {
                 self.view.layoutIfNeeded()
             })
             didTouched = true
         } else {
-            self.viewHeight.constant = 150
+           // mapView.frame.size.height = 220
+            self.viewHeight.constant = 223
+            //self.animateMap.addSubview(mapView)
             //mapView.clipsToBounds = false
             UIView.animate(withDuration: 0.7, animations: {
                 self.view.layoutIfNeeded()
@@ -184,16 +196,19 @@ extension ViewController: CLLocationManagerDelegate {
 
         if location.horizontalAccuracy > 0 {
             //locationManager.stopUpdatingLocation()
-            let latitude = String(location.coordinate.latitude)
-            let longitute = String(location.coordinate.longitude)
+            _ = String(location.coordinate.latitude)
+            _ = String(location.coordinate.longitude)
        }
 
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: zoomLevel)
         mapView.settings.myLocationButton = true
+        
         mapView.isMyLocationEnabled = true
         mapView.settings.accessibilityNavigationStyle = .combined
 //        mapView.accessibilityNavigationStyle =
         
+            
+            
         
         if mapView.isHidden {
             mapView.isHidden = false

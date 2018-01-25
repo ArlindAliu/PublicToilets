@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class LocationModel: NSObject {
     
@@ -20,8 +21,11 @@ class LocationModel: NSObject {
     let perInvalid: Bool
     let rating: String
     let pershkrimi: String
+    let camera: GMSCameraPosition
     
-    init(emri: String, tipi: String, distanca: String, latitude: Double, longitude: Double, perFemna: Bool, perMeshkuj: Bool, perInvalid: Bool, rating: String, pershkrimi: String) {
+    
+    
+    init(emri: String, tipi: String, distanca: String, latitude: Double, longitude: Double, perFemna: Bool, perMeshkuj: Bool, perInvalid: Bool, rating: String, pershkrimi: String, camera: GMSCameraPosition) {
         
         self.emri = emri
         self.tipi = tipi
@@ -33,6 +37,9 @@ class LocationModel: NSObject {
         self.perInvalid = perInvalid
         self.rating = rating
         self.pershkrimi = pershkrimi
+        self.camera = camera
+        
+    
     }
     
 
