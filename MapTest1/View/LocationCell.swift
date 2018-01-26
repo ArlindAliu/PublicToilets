@@ -14,8 +14,12 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var distanceLbl: UILabel!
     @IBOutlet weak var ratingLbl: UILabel!
     @IBOutlet weak var tipiLbl: UILabel!
-//    @IBOutlet weak var latLbl: UILabel!
-//    @IBOutlet weak var longLbl: UILabel!
+
+    @IBOutlet weak var foto1: UIImageView!
+    @IBOutlet weak var foto2: UIImageView!
+    @IBOutlet weak var foto3: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

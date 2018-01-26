@@ -46,16 +46,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         locationManager.delegate = self
         
         for index in 0...(obj.locationArray.count - 1){
-        let marker = GMSMarker()
+            let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
         marker.title = "\(obj.locationArray[index].emri)"
         marker.snippet = "\(obj.locationArray[index].tipi)"
+        marker.isTappable = true
         marker.map = mapView
-            
-//            if mapView(mapView, didTap: marker) = true {
-//                currentPlace?.distance(from: marker.position)
-//        }
-    }
+        
+      
+        }
+        
     }
     func getData(params: [String:Any]){
         Alamofire.request(url, method: .get, parameters: params).responseData { (data) in
@@ -74,6 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
         
     }
+    
      func mapView(_mapView: GMSMapView, didTap: GMSMarker)  {
         
         
@@ -159,36 +160,67 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //    }
 //    }
     
-    @IBAction func mapTouched(_ sender: UITapGestureRecognizer) {
-        if sender.state == .began {
-            
-        if didTouched == false {
-            
-            //mapView.clipsToBounds = true
-            
-            self.viewHeight.constant = self.view.bounds.height
-            //self.animateMap.addSubview(mapView)
-           // mapView.frame.size.height = view.bounds.height
-            UIView.animate(withDuration: 0.7, animations: {
-                self.view.layoutIfNeeded()
-            })
-            didTouched = true
-        } else {
-           // mapView.frame.size.height = 220
-            self.viewHeight.constant = 223
-            //self.animateMap.addSubview(mapView)
-            //mapView.clipsToBounds = false
-            UIView.animate(withDuration: 0.7, animations: {
-                self.view.layoutIfNeeded()
-
-            })
-            didTouched = false
-            }
+    private func mapView(_ mapView: GMSMapView, didTapAt marker : GMSMarker) -> Bool{
         
-        }
-        
-        }}
-
+            
+//            if didTouched == false {
+//
+//                //mapView.clipsToBounds = true
+//
+//                self.viewHeight.constant = 400
+//                //self.animateMap.addSubview(mapView)
+//                // mapView.frame.size.height = view.bounds.height
+//                UIView.animate(withDuration: 0.7, animations: {
+//                    self.view.layoutIfNeeded()
+//                })
+//                didTouched = true
+//            } else {
+//                // mapView.frame.size.height = 220
+//                self.viewHeight.constant = 223
+//                //self.animateMap.addSubview(mapView)
+//                //mapView.clipsToBounds = false
+//                UIView.animate(withDuration: 0.7, animations: {
+//                    self.view.layoutIfNeeded()
+//
+//                })
+//                didTouched = false
+//
+//
+//        }
+        print("llllllllllllllllllll")
+        return true
+    }
+    
+//    @IBAction func mapTouched(_ sender: UITapGestureRecognizer) {
+//        if sender.state == .ended {
+//
+//        if didTouched == false {
+//
+//            //mapView.clipsToBounds = true
+//
+//            self.viewHeight.constant = self.view.bounds.height
+//            //self.animateMap.addSubview(mapView)
+//           // mapView.frame.size.height = view.bounds.height
+//            UIView.animate(withDuration: 0.7, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//            didTouched = true
+//        } else {
+//           // mapView.frame.size.height = 220
+//            self.viewHeight.constant = 223
+//            //self.animateMap.addSubview(mapView)
+//            //mapView.clipsToBounds = false
+//            UIView.animate(withDuration: 0.7, animations: {
+//                self.view.layoutIfNeeded()
+//
+//            })
+//            didTouched = false
+//            }
+//
+//        }
+//
+//        }}
+}
 extension ViewController: CLLocationManagerDelegate {
          func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.first!
