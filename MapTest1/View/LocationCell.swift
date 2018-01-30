@@ -15,6 +15,7 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var ratingLbl: UILabel!
     @IBOutlet weak var tipiLbl: UILabel!
 
+    @IBOutlet weak var fotoELokalit: UIImageView!
     @IBOutlet weak var foto1: UIImageView!
     @IBOutlet weak var foto2: UIImageView!
     @IBOutlet weak var foto3: UIImageView!
@@ -35,8 +36,27 @@ class LocationCell: UITableViewCell {
         distanceLbl.text = locations.distanca
         ratingLbl.text = locations.rating
         tipiLbl.text = locations.tipi
-        
-//        longLbl.text = "\(locations.longitude)"
-//        latLbl.text = "\(locations.latitude)"
+        fotoELokalit.image = UIImage(named: locations.foto)
+        if locations.perFemna == true{
+            foto2.image = UIImage(named: "perFemna")
+            
+        } else {
+            foto2.image = nil
+            foto2.backgroundColor = UIColor.white
+        }
+        if locations.perMeshkuj == true{
+            foto1.image = UIImage(named: "perMeshkuj")
+            
+        } else {
+            foto1.image = nil
+            foto1.backgroundColor = UIColor.white
+        }
+        if locations.perInvalid == true{
+            foto3.image = UIImage(named: "perInvalid")
+            
+        } else {
+            foto3.image = nil
+            foto3.backgroundColor = UIColor.white
+        }
     }
 }

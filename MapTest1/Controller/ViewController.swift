@@ -47,32 +47,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         for index in 0...(obj.locationArray.count - 1){
             let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
-        marker.title = "\(obj.locationArray[index].emri)"
-        marker.snippet = "\(obj.locationArray[index].tipi)"
-        marker.isTappable = true
-        marker.map = mapView
-        
+            marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
+            marker.title = "\(obj.locationArray[index].emri)"
+            marker.snippet = "\(obj.locationArray[index].tipi)"
+            marker.isTappable = true
+            marker.map = self.mapView
+            
+            
+            
+//        let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
+//        let userCurrentLocation = CLLocation(latitude: UserLocation.sharedInstance.latitude, longitude: UserLocation.sharedInstance.longitude)
+//        let fiiu = userCurrentLocation.distance(from: locationDistance)
+//            print("Anglia = aaaaaaaa\(fiiu )" )
       
         }
         
+        
     }
     func getData(params: [String:Any]){
-        Alamofire.request(url, method: .get, parameters: params).responseData { (data) in
+        Alamofire.request(url!, method: .get, parameters: params).responseData { (data) in
             if data.result.isSuccess{
                 let json = JSON(data.result.value!)
                 
                 print(json)
             }
         }
-//        Alamofire.request(url).responseData {(data) in
-//            if data.result.isSuccess{
-//
-//
-//
-//            }
-//        }
-        
+
     }
     
      func mapView(_mapView: GMSMapView, didTap: GMSMarker)  {
@@ -98,10 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.requestWhenInUseAuthorization()
         }
     }
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .authorizedWhenInUse{
-//            mapView.camera = GMSCameraPosition.camera(withLatitude: UserLocation.sharedInstance.latitude, longitude: UserLocation.sharedInstance.longitude, zoom: zoomLevel)
-//        }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -125,8 +121,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "detailsVC"{
             let detail = segue.destination as! DetailLocationVController
             detail.obj = sender as? LocationModel
-            
-            
+    
         }
     }
     
@@ -134,33 +129,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return obj.locationArray.count
     }
 
-
-//func placePickerView(){
-//    let center = CLLocationCoordinate2DMake(obj.locationArray[0].latitude, obj.locationArray[0].longitude)
-//    let config = GMSPlacePickerConfig(viewport: nil)
-//    self.placePicker = GMSPlacePicker(config: config)
-////    present(placePicker, animated: true, completion: nil)
-//    // 2
-//    placePicker.pickPlace { (place: GMSPlace?, error: Error?) -> Void in
-//
-//        if let error = error {
-//            print("Error occurred: \(error.localizedDescription)")
-//            return
-//        }
-//        // 3
-//        if let place = place {
-//            let coordinates = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
-//            let marker = GMSMarker(position: coordinates)
-//            marker.title = place.name
-//            marker.map = self.mapView
-//            self.mapView.animate(toLocation: coordinates)
-//        } else {
-//            print("No place was selected")
-//        }
-//    }
-//    }
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        print("Coordinate eshte e barabarte me  = \(coordinate)")
+    }
     
-    private func mapView(_ mapView: GMSMapView, didTapAt marker : GMSMarker) -> Bool{
+    internal func mapView(_ mapView: GMSMapView, didTap marker : GMSMarker) -> Bool{
         
             
 //            if didTouched == false {
@@ -187,7 +160,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //
 //
 //        }
-        print("llllllllllllllllllll")
+        print("LLLLLLLLLLLLLLAALALALLALALALALALAL")
         return true
     }
     
@@ -234,14 +207,10 @@ extension ViewController: CLLocationManagerDelegate {
 
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: zoomLevel)
         mapView.settings.myLocationButton = true
-        
+       
         mapView.isMyLocationEnabled = true
         mapView.settings.accessibilityNavigationStyle = .combined
-//        mapView.accessibilityNavigationStyle =
-        
-            
-            
-        
+
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera

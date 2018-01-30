@@ -22,10 +22,10 @@ class LocationModel: NSObject {
     let rating: String
     let pershkrimi: String
     let camera: GMSCameraPosition
+    let foto : String
     
     
-    
-    init(emri: String, tipi: String, distanca: String, latitude: Double, longitude: Double, perFemna: Bool, perMeshkuj: Bool, perInvalid: Bool, rating: String, pershkrimi: String, camera: GMSCameraPosition) {
+    init(emri: String, tipi: String, distanca: String, latitude: Double, longitude: Double, perFemna: Bool, perMeshkuj: Bool, perInvalid: Bool, rating: String, pershkrimi: String, camera: GMSCameraPosition, foto: String) {
         
         self.emri = emri
         self.tipi = tipi
@@ -38,7 +38,7 @@ class LocationModel: NSObject {
         self.rating = rating
         self.pershkrimi = pershkrimi
         self.camera = camera
-        
+        self.foto = foto
     
     }
     

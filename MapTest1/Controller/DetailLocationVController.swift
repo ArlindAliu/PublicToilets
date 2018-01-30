@@ -13,7 +13,6 @@ class DetailLocationVController: UIViewController {
 
     @IBOutlet weak var emriLbl: UILabel!
     @IBOutlet weak var pershkrimiLbl: UILabel!
-    
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var viewHeight: UIView!
@@ -35,9 +34,9 @@ class DetailLocationVController: UIViewController {
     @IBOutlet weak var ratingValueLbl6: UILabel!
     @IBOutlet weak var ratingValueLbl7: UILabel!
     @IBOutlet weak var ratingValueLbl8: UILabel!
-    
     @IBOutlet weak var starRating6: CosmosView!
     @IBOutlet weak var ratingValueLbl: UILabel!
+    
     var obj : LocationModel?
     var rating: CosmosView?
     
