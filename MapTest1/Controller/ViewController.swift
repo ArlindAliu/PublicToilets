@@ -30,7 +30,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var zoomLevel : Float = 15;
     var obj = Locations()
     var didTouched: Bool = false
-    let url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw"
+    let url = URL(string : "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw")
+    var distanca = CLLocationDistance()
+    var location1: CLLocation?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
+        func mapView(_mapView: GMSMapView, didTap: GMSMarker){
+            print("AAAAAAAAAAAAAAAAAAAAA")
+        }
+        
+        
         for index in 0...(obj.locationArray.count - 1){
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
@@ -52,14 +60,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             marker.snippet = "\(obj.locationArray[index].tipi)"
             marker.isTappable = true
             marker.map = self.mapView
+
+            
+        let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
+        let userCurrentLocation = CLLocation(latitude: 42.654825, longitude: 21.156660)
+        distanca = userCurrentLocation.distance(from: locationDistance)
+        let distancaNeKilometra = (distanca / 1000)
+            
+           let roundDistance = String(format:"%.02f", distancaNeKilometra)
             
             
+            obj.locationArray[index].distanca = "\(roundDistance)km"
             
-//        let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
-//        let userCurrentLocation = CLLocation(latitude: UserLocation.sharedInstance.latitude, longitude: UserLocation.sharedInstance.longitude)
-//        let fiiu = userCurrentLocation.distance(from: locationDistance)
-//            print("Anglia = aaaaaaaa\(fiiu )" )
-      
         }
         
         
@@ -108,7 +120,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "celliJon") as! LocationCell
          cell.mbusheListen(locations: obj.locationArray[indexPath.row])
-        tableView.rowHeight = 111
+        tableView.rowHeight = 120
         
         return cell
     }
@@ -210,7 +222,10 @@ extension ViewController: CLLocationManagerDelegate {
        
         mapView.isMyLocationEnabled = true
         mapView.settings.accessibilityNavigationStyle = .combined
-
+            if mapView.settings.accessibilityNavigationStyle == .combined {
+                let path = GMSPath()
+               
+            }
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera

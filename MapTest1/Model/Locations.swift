@@ -22,7 +22,7 @@ class Locations: NSObject {
     
     override init() {
     
-        let location1 = LocationModel(emri: "StayBar", tipi: "Kafe", distanca: ("1111"), latitude: 42.654825, longitude: 21.156660, perFemna: true, perMeshkuj: true, perInvalid: false, rating: "4.2", pershkrimi: "posht nalt majtas", camera: GMSCameraPosition.camera(withLatitude: 42.654825, longitude: 21.156660, zoom: 15) , foto: "StayBar")
+        let location1 = LocationModel(emri: "StayBar", tipi: "Kafe", distanca: "1111", latitude: 42.654825, longitude: 21.156660, perFemna: true, perMeshkuj: true, perInvalid: false, rating: "4.2", pershkrimi: "posht nalt majtas", camera: GMSCameraPosition.camera(withLatitude: 42.654825, longitude: 21.156660, zoom: 15) , foto: "StayBar")
     
         locationArray.append(location1)
         

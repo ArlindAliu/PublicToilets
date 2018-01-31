@@ -20,6 +20,7 @@
 		0EA8476A1FF27E98004018CA /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA847691FF27E98004018CA /* UserLocation.swift */; };
 		0EB293C81FF38E1D004EEF0F /* MyLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0EB293C71FF38E1D004EEF0F /* MyLocation.gpx */; };
 		0EB659451FF07DBE004F6796 /* RatingStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB659441FF07DBE004F6796 /* RatingStars.swift */; };
+		0EF923652022065D00A4606C /* roboto in Resources */ = {isa = PBXBuildFile; fileRef = 0EF923642022065C00A4606C /* roboto */; };
 		5E76050B48D127DDE90920C0 /* Pods_MapTest1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FD398D4AAA450A891DFDF2 /* Pods_MapTest1.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		0EA8476B1FF2D639004018CA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0EB293C71FF38E1D004EEF0F /* MyLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyLocation.gpx; sourceTree = "<group>"; };
 		0EB659441FF07DBE004F6796 /* RatingStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStars.swift; sourceTree = "<group>"; };
+		0EF923642022065C00A4606C /* roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = roboto; path = ../../../CreateTestDesign/roboto; sourceTree = "<group>"; };
 		137854676CC9F6E610128723 /* Pods-MapTest1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapTest1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapTest1/Pods-MapTest1.debug.xcconfig"; sourceTree = "<group>"; };
 		326D06FCC40524FEDA0241D8 /* Pods-MapTest1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapTest1.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapTest1/Pods-MapTest1.release.xcconfig"; sourceTree = "<group>"; };
 		B1FD398D4AAA450A891DFDF2 /* Pods_MapTest1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapTest1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 				0EA847691FF27E98004018CA /* UserLocation.swift */,
 				0EB293C71FF38E1D004EEF0F /* MyLocation.gpx */,
 				0EB659441FF07DBE004F6796 /* RatingStars.swift */,
+				0EF923642022065C00A4606C /* roboto */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF923652022065D00A4606C /* roboto in Resources */,
 				0E834DE81FEED50500FD13A8 /* LaunchScreen.storyboard in Resources */,
 				0E834DE51FEED50500FD13A8 /* Assets.xcassets in Resources */,
 				0EB293C81FF38E1D004EEF0F /* MyLocation.gpx in Resources */,

@@ -13,7 +13,7 @@ class LocationModel: NSObject {
     
     let emri: String
     let tipi: String
-    let distanca: String
+    var distanca: String
     let latitude: Double
     let longitude: Double
     let perFemna: Bool
