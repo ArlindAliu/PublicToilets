@@ -74,6 +74,29 @@ class DetailLocationVController: UIViewController {
         super.viewDidLayoutSubviews()
         scrollView.contentSize = CGSize(width: stackView.frame.width, height: stackView.frame.height)
     }
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        print("Coordinate eshte e barabarte me  = \(coordinate.latitude)")
+        if didTouched == false {
+            
+            self.viewHeight.constant = self.view.bounds.height
+            
+            UIView.animate(withDuration: 0.7, animations: {
+                self.view.layoutIfNeeded()
+            })
+            didTouched = true
+        } else {
+            
+            self.viewHeight.constant = 200
+            
+            UIView.animate(withDuration: 0.7, animations: {
+                self.view.layoutIfNeeded()
+                
+            })
+            didTouched = false
+            
+            
+        }
+    }
     
     func ratingStars(){
         
