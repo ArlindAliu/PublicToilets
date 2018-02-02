@@ -15,7 +15,7 @@ import SwiftyJSON
 
 //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)"&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate , RatingDelegate{
     
     @IBOutlet weak var animateMap: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -32,8 +32,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var didTouched: Bool = false
     let url = URL(string : "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw")
     var distanca = CLLocationDistance()
-    var location1: CLLocation?
-    
+    var ratingString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         locationManager.delegate = self
         self.mapView.delegate = self
         
-        func mapView(_mapView: GMSMapView, didTap: GMSMarker){
-            print("AAAAAAAAAAAAAAAAAAAAA")
-        }
-        
-        
+  
         for index in 0...(obj.locationArray.count - 1){
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2DMake(obj.locationArray[index].latitude, obj.locationArray[index].longitude)
@@ -70,14 +65,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let distancaNeKilometra = (distanca / 1000)
             
            let roundDistance = String(format:"%.02f", distancaNeKilometra)
-            
-            
-            obj.locationArray[index].distanca = "\(roundDistance)km"
+           obj.locationArray[index].distanca = "\(roundDistance)km"
             
         }
-        
-        
+
     }
+    
     func getData(params: [String:Any]){
         Alamofire.request(url!, method: .get, parameters: params).responseData { (data) in
             if data.result.isSuccess{
@@ -86,15 +79,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print(json)
             }
         }
-
     }
     
-     func mapView(_mapView: GMSMapView, didTap: GMSMarker)  {
-        
-        
-        
-    }
     
+    func ratingValue(ratingTxt: String) {
+        ratingString = ratingTxt
+    }
     func locationManager(manager: CLLocationManager,
                          didFailWithError error: NSError){
         
@@ -121,7 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "celliJon") as! LocationCell
-         cell.mbusheListen(locations: obj.locationArray[indexPath.row])
+        cell.mbusheListen(locations: obj.locationArray[indexPath.row], rating : ratingString ?? "4.2")
         tableView.rowHeight = 120
         
         return cell
@@ -129,6 +119,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "detailsVC", sender: obj.locationArray[indexPath.row])
+        
     }
     
     
@@ -164,20 +155,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         })
                         didTouched = false
         
-        
-                }
+        }
     }
     
-    internal func mapView(_ mapView: GMSMapView, didTap marker : GMSMarker) -> Bool{
-        
-        
-            
-
-        print("LLLLLLLLLLLLLLAALALALLALALALALALAL")
-        return true
-    }
-    
-
 }
 extension ViewController: CLLocationManagerDelegate {
          func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -185,20 +165,17 @@ extension ViewController: CLLocationManagerDelegate {
         print("Locations : \(location)")
 
         if location.horizontalAccuracy > 0 {
-            //locationManager.stopUpdatingLocation()
-            _ = String(location.coordinate.latitude)
-            _ = String(location.coordinate.longitude)
+            locationManager.stopUpdatingLocation()
+//            _ = String(location.coordinate.latitude)
+//            _ = String(location.coordinate.longitude)
        }
 
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: zoomLevel)
+            
         mapView.settings.myLocationButton = true
-       
         mapView.isMyLocationEnabled = true
         mapView.settings.accessibilityNavigationStyle = .combined
-//            if mapView.settings.accessibilityNavigationStyle == .combined {
-//                let path = GMSPath()
-//
-//            }
+
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera

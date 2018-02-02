@@ -9,13 +9,18 @@
 import UIKit
 import GoogleMaps
 
-class DetailLocationVController: UIViewController {
+protocol RatingDelegate {
+    
+    func ratingValue(ratingTxt: String)
+    
+}
+
+class DetailLocationVController: UIViewController , GMSMapViewDelegate{
 
     @IBOutlet weak var emriLbl: UILabel!
     @IBOutlet weak var pershkrimiLbl: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var viewHeight: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var starRating: CosmosView!
     @IBOutlet weak var overallRating: UILabel!
@@ -36,19 +41,150 @@ class DetailLocationVController: UIViewController {
     @IBOutlet weak var ratingValueLbl8: UILabel!
     @IBOutlet weak var starRating6: CosmosView!
     @IBOutlet weak var ratingValueLbl: UILabel!
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
     
     var obj : LocationModel?
     var rating: CosmosView?
+    var didTouched = false
+    var delegate : RatingDelegate?
     
-    var a : (Double) = 0
-    var b : (Double) = 0
-    var c : (Double) = 0
-    var d : (Double) = 0
-    var e : (Double) = 0
-    var f : (Double) = 0
-    var g : (Double) = 0
-    var l : (Double) = 0
-    var m : (Double) = 0
+    var sum = Double()
+    var dic = [String:Double]()
+    var a : (Double) = 0 {
+        didSet {
+            
+           sum = 0
+           dic["numri1"] = a
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+            }
+    }
+    var b : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri2"] = b
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var c : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri3"] = c
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var d : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri4"] = d
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var e : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri5"] = e
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var f : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri6"] = f
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var g : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri7"] = g
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var l : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri8"] = l
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
+    var m : (Double) = 0{
+        didSet {
+            
+            sum = 0
+            dic["numri9"] = m
+            for (_,j) in dic{
+                sum = sum + j
+            }
+            let roundii = round((sum / Double(dic.count)) * 10) / 10
+            
+            
+            overallRating.text = "\(roundii)"
+            delegate?.ratingValue(ratingTxt: "\(roundii)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +193,7 @@ class DetailLocationVController: UIViewController {
         pershkrimiLbl.text = obj?.pershkrimi
         overallRating.text = obj?.rating
         mapView.camera = (obj?.camera)! 
+        self.mapView.delegate = self
         
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake((obj?.latitude)!,(obj?.longitude)!)
@@ -100,7 +237,7 @@ class DetailLocationVController: UIViewController {
     
     func ratingStars(){
         
-       var arrayOfRatings: [Double]?
+      
         
         starRating.didFinishTouchingCosmos = { rating in
             
@@ -116,10 +253,7 @@ class DetailLocationVController: UIViewController {
         starRating2.didFinishTouchingCosmos = {rating2 in
             self.ratingValueLbl2.text = "\(rating2)"
             self.c = rating2
-//            if starRating2.didChangeValue(for: KeyPath<CosmosView, Value){
-            
-                
-            //}
+
         }
         starRating3.didFinishTouchingCosmos = {rating3 in
             self.ratingValueLbl3.text = "\(rating3)"
@@ -147,8 +281,8 @@ class DetailLocationVController: UIViewController {
             self.ratingValueLbl8.text = "\(rating8)"
             self.m = rating8
         }
-        let sum = (self.a + self.b + self.c + self.d + self.e + self.f + self.g + self.l + self.m) / 9
-        overallRating.text = "\(sum)"
+        
+        
     }
 }
 

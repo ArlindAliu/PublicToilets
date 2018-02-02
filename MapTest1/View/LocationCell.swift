@@ -31,10 +31,10 @@ class LocationCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func mbusheListen(locations: LocationModel){
+    func mbusheListen(locations: LocationModel, rating: String){
         emriLbl.text = locations.emri
         distanceLbl.text = locations.distanca
-        ratingLbl.text = locations.rating
+        ratingLbl.text = rating
         tipiLbl.text = locations.tipi
         fotoELokalit.image = UIImage(named: locations.foto)
         if locations.perFemna == true{
