@@ -39,8 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
+  
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -60,15 +59,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             
         let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
-        let userCurrentLocation = CLLocation(latitude: 42.654825, longitude: 21.156660)
+        let userCurrentLocation = CLLocation(latitude: (42.654239), longitude: (21.157108))
         distanca = userCurrentLocation.distance(from: locationDistance)
         let distancaNeKilometra = (distanca / 1000)
-            
-           let roundDistance = String(format:"%.02f", distancaNeKilometra)
+        distanceArray.append(distancaNeKilometra)
+        var abcd = distanceArray.sorted(by: <)
+           let roundDistance = String(format:"%.02f", abcd)
            obj.locationArray[index].distanca = "\(roundDistance)km"
-            
+           print(obj.locationArray[index].distanca)
         }
-
     }
     
     func getData(params: [String:Any]){
@@ -174,6 +173,8 @@ extension ViewController: CLLocationManagerDelegate {
             
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
+        mapView.settings.compassButton = true
+    
         mapView.settings.accessibilityNavigationStyle = .combined
 
         if mapView.isHidden {

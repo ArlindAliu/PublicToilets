@@ -39,10 +39,12 @@ class Locations: NSObject {
         let location5 = LocationModel(emri: "Monroe", tipi: "Lounge Bar", distanca: "1111", latitude: 42.664878, longitude: 21.158634, perFemna: true, perMeshkuj: true, perInvalid: true, rating: "4.8", pershkrimi: "Tek qafa, perball mamounia bar ", camera: GMSCameraPosition.camera(withLatitude: 42.664878, longitude: 21.158634, zoom:15 ), foto: "Monroe")
         locationArray.append(location5)
         
+        
+        
     }
     
    
-    
+
     
     
 }
