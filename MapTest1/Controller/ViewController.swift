@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var navigationBar: UINavigationItem!
     
+    @IBOutlet weak var goButton: UIButton!
     
     var placePicker: GMSPlacePicker!
     var locationManager = CLLocationManager()
@@ -30,10 +31,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var zoomLevel : Float = 15;
     var obj = Locations()
     var didTouched: Bool = false
-    let url = URL(string : "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw")
+    let url = URL(string : "http://maps.googleapis.com/maps/api/directions/json?origin=42.654239,21.157108&destination=42.664760,21.157904")
     var distanca = CLLocationDistance()
     var ratingString: String?
-
+    var distanceArray = [CLLocationDistance()]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             marker.snippet = "\(obj.locationArray[index].tipi)"
             marker.isTappable = true
             marker.map = self.mapView
-
+            
             
         let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
         let userCurrentLocation = CLLocation(latitude: (42.654239), longitude: (21.157108))
@@ -68,6 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
            obj.locationArray[index].distanca = "\(roundDistance)km"
            print(obj.locationArray[index].distanca)
         }
+         goButton.frame = CGRect(x: 320, y: 220, width: 30, height: 30)
+         self.view.addSubview(goButton)
     }
     
     func getData(params: [String:Any]){
@@ -80,6 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    @IBAction func showDirection(_ sender: Any) {
+        
+    }
     
     func ratingValue(ratingTxt: String) {
         ratingString = ratingTxt
@@ -139,7 +147,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if didTouched == false {
  
                         self.viewHeight.constant = self.view.bounds.height
-                        
+                        goButton.frame = CGRect(x: 320, y: 600, width: 50, height: 50)
                         UIView.animate(withDuration: 0.7, animations: {
                             self.view.layoutIfNeeded()
                         })
@@ -147,7 +155,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     } else {
                        
                         self.viewHeight.constant = 200
-                        
+                        goButton.frame = CGRect(x: 320, y: 220, width: 30, height: 30)
                         UIView.animate(withDuration: 0.7, animations: {
                             self.view.layoutIfNeeded()
         
