@@ -31,11 +31,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var zoomLevel : Float = 15;
     var obj = Locations()
     var didTouched: Bool = false
-    let url = URL(string : "http://maps.googleapis.com/maps/api/directions/json?origin=42.654239,21.157108&destination=42.664760,21.157904")
+    let url = URL(string : "https://maps.googleapis.com/maps/api/directions/json?origin=42.654239,21.157108&destination=42.664760,21.157904&key=AIzaSyB5gTvTzQpq0-mkGS6LDceAnQKAU4FPPbY")
     var distanca = CLLocationDistance()
     var ratingString: String?
     var distanceArray = [CLLocationDistance()]
-    
+    let userCurrentLocation = CLLocation(latitude: (42.654239), longitude: (21.157108))
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,33 +63,59 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             
         let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
-        let userCurrentLocation = CLLocation(latitude: (42.654239), longitude: (21.157108))
         distanca = userCurrentLocation.distance(from: locationDistance)
         let distancaNeKilometra = (distanca / 1000)
         distanceArray.append(distancaNeKilometra)
-        var abcd = distanceArray.sorted(by: <)
-           let roundDistance = String(format:"%.02f", abcd)
+         
+           let roundDistance = String(format:"%.02f", distanceArray.sorted(by: <))
            obj.locationArray[index].distanca = "\(roundDistance)km"
-           print(obj.locationArray[index].distanca)
+            print(distanceArray.sorted(by: <))
         }
-         goButton.frame = CGRect(x: 320, y: 220, width: 30, height: 30)
+         goButton.frame = CGRect(x: 310, y: 160, width: 30, height: 30)
          self.view.addSubview(goButton)
+         goButton.isHidden = true
+        
     }
     
-    func getData(params: [String:Any]){
-        Alamofire.request(url!, method: .get, parameters: params).responseData { (data) in
-            if data.result.isSuccess{
-                let json = JSON(data.result.value!)
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+       goButton.isHidden = false
+        return true
+ 
+    }
+    
+    func getData(){
+        Alamofire.request(url!).responseData{ response in
+            if let JSON = response.result.value{
                 
-                print(json)
+                let mapResponse: [String : Any] = JSON as! [String : Any]
+                
+                let routesArray = (mapResponse["routes"] as? Array) ?? []
+                
+                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+                
+                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
+                let polypoints = (overviewPolyline["points"] as? String) ?? ""
+                let line  = polypoints
+                print("\(mapResponse) = MAP RESPONSE ")
+                self.addPolyLine(encodedString: line)
+                
             }
         }
     }
     
     @IBAction func showDirection(_ sender: Any) {
+        getData()
+    }
+    func addPolyLine(encodedString: String) {
+        
+        let path = GMSMutablePath(fromEncodedPath: encodedString)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 5
+        polyline.strokeColor = .blue
+        polyline.map = mapView
         
     }
-    
     func ratingValue(ratingTxt: String) {
         ratingString = ratingTxt
     }
@@ -147,7 +174,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if didTouched == false {
  
                         self.viewHeight.constant = self.view.bounds.height
-                        goButton.frame = CGRect(x: 320, y: 600, width: 50, height: 50)
+                        goButton.frame = CGRect(x: 310, y: 540, width: 50, height: 50)
                         UIView.animate(withDuration: 0.7, animations: {
                             self.view.layoutIfNeeded()
                         })
@@ -155,7 +182,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     } else {
                        
                         self.viewHeight.constant = 200
-                        goButton.frame = CGRect(x: 320, y: 220, width: 30, height: 30)
+                        goButton.frame = CGRect(x: 310, y: 160, width: 30, height: 30)
+                        
                         UIView.animate(withDuration: 0.7, animations: {
                             self.view.layoutIfNeeded()
         
@@ -169,6 +197,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 extension ViewController: CLLocationManagerDelegate {
          func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.first!
+            tableView.reloadData()
         print("Locations : \(location)")
 
         if location.horizontalAccuracy > 0 {
@@ -182,7 +211,6 @@ extension ViewController: CLLocationManagerDelegate {
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
         mapView.settings.compassButton = true
-    
         mapView.settings.accessibilityNavigationStyle = .combined
 
         if mapView.isHidden {
