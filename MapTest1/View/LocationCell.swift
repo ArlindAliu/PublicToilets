@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class LocationCell: UITableViewCell {
 
@@ -19,6 +20,8 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var foto1: UIImageView!
     @IBOutlet weak var foto2: UIImageView!
     @IBOutlet weak var foto3: UIImageView!
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -33,10 +36,10 @@ class LocationCell: UITableViewCell {
     }
     
     
-    func mbusheListen(locations: LocationModel, rating: String){
+    func mbusheListen(locations: LocationModel){
         emriLbl.text = locations.emri
-        distanceLbl.text = locations.distanca
-        ratingLbl.text = rating
+        
+        ratingLbl.text = locations.rating
         tipiLbl.text = locations.tipi
         fotoELokalit.image = UIImage(named: locations.foto)
         self.fotoELokalit.layer.masksToBounds = true
@@ -68,5 +71,8 @@ class LocationCell: UITableViewCell {
             foto3.layer.cornerRadius = 0
             foto3.layer.shadowColor = nil
         }
+    }
+    func updateDistancen(distance: CLLocationDistance){
+        distanceLbl.text = String(format:"%.02f", distance/1000)
     }
 }

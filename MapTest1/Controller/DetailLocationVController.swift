@@ -62,6 +62,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
             }
     }
@@ -77,6 +78,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -92,6 +94,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -107,6 +110,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -122,6 +126,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -137,6 +142,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -152,6 +158,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -167,6 +174,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }
@@ -182,6 +190,7 @@ class DetailLocationVController: UIViewController , GMSMapViewDelegate{
             
             
             overallRating.text = "\(roundii)"
+            obj?.rating = "\(roundii)"
             delegate?.ratingValue(ratingTxt: "\(roundii)")
         }
     }

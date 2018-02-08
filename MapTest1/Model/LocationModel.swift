@@ -19,11 +19,11 @@ class LocationModel: NSObject {
     let perFemna: Bool
     let perMeshkuj: Bool
     let perInvalid: Bool
-    let rating: String
+    var rating: String
     let pershkrimi: String
     let camera: GMSCameraPosition
-    let foto : String
-    
+    var foto : String
+    let urlPhoto : String = "https://scontent.fprx2-1.fna.fbcdn.net/v/t1.0-9/16729136_1392230747509127_6670818541267376519_n.jpg?oh=7ff91f5ebff5bc2c92697e2c88489544&oe=5AD9C724"
     
     init(emri: String, tipi: String, distanca: String, latitude: Double, longitude: Double, perFemna: Bool, perMeshkuj: Bool, perInvalid: Bool, rating: String, pershkrimi: String, camera: GMSCameraPosition, foto: String) {
         
@@ -41,6 +41,8 @@ class LocationModel: NSObject {
         self.foto = foto
     
     }
-    
+    func updatePhoto () -> String{
+        return  urlPhoto
+    }
 
 }

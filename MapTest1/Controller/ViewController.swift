@@ -12,8 +12,9 @@ import CoreLocation
 import GooglePlacePicker
 import Alamofire
 import SwiftyJSON
+import AlamofireImage
 
-//https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="\(UserLocation.sharedInstance.latitude,UserLocation.sharedInstance.longitude)"&destinations=42.654825%2C-21.156660%7C42.654955%2C21.156883%7C42.654239%2C21.157108%7C42.664760%2C-21.157904%7C42.664878%2C21.158634=AIzaSyD9OCUClqFN1Y9Qw_9JKyIr2E508oau-hw
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate , RatingDelegate{
     
@@ -24,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     @IBOutlet weak var goButton: UIButton!
-    
+    var ferr = false
     var placePicker: GMSPlacePicker!
     var locationManager = CLLocationManager()
     var currentPlace : CLLocation?
@@ -32,11 +33,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var obj = Locations()
     var didTouched: Bool = false
     let url = URL(string : "https://maps.googleapis.com/maps/api/directions/json?origin=42.654239,21.157108&destination=42.664760,21.157904&key=AIzaSyB5gTvTzQpq0-mkGS6LDceAnQKAU4FPPbY")
+    
     var distanca = CLLocationDistance()
     var ratingString: String?
     var distanceArray = [CLLocationDistance()]
-    let userCurrentLocation = CLLocation(latitude: (42.654239), longitude: (21.157108))
-
+    var userCurrentLocation = CLLocation(latitude: 42.654239, longitude: 21.157904)
+    var sortedLocations = [LocationModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,33 +64,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             marker.map = self.mapView
             
             
-        let locationDistance = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
-        distanca = userCurrentLocation.distance(from: locationDistance)
-        let distancaNeKilometra = (distanca / 1000)
-        distanceArray.append(distancaNeKilometra)
-         
-           let roundDistance = String(format:"%.02f", distanceArray.sorted(by: <))
-           obj.locationArray[index].distanca = "\(roundDistance)km"
-            print(distanceArray.sorted(by: <))
         }
+        for index in obj.locationArray{
+            let locationDistance = CLLocation(latitude: index.latitude, longitude: index.longitude)
+            
+            distanca = userCurrentLocation.distance(from: locationDistance)
+            let distancaNeKilometra = (distanca / 1000)
+            let roundDistance = String(format:"%.02f", distancaNeKilometra)
+            distanceArray.append(distanca)
+            
+            
+        }
+         sortedLocations.append(contentsOf: obj.locationArray)
          goButton.frame = CGRect(x: 310, y: 160, width: 30, height: 30)
          self.view.addSubview(goButton)
          goButton.isHidden = true
-        
+        print("\(sortedLocations) ciu ciucci uci uci cuciuci uc **************************")
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
+        if ferr == false {
        goButton.isHidden = false
+        
+     ferr = true
+        } else {
+           goButton.isHidden = true
+            ferr = false
+        }
         return true
- 
     }
     
     func getData(){
-        Alamofire.request(url!).responseData{ response in
+        Alamofire.request(url!).responseJSON{ response in
             if let JSON = response.result.value{
                 
-                let mapResponse: [String : Any] = JSON as! [String : Any]
+                let mapResponse: [String : Any] = JSON as! [String: Any]
                 
                 let routesArray = (mapResponse["routes"] as? Array) ?? []
                 
@@ -143,16 +154,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "celliJon") as? LocationCell{
+
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "celliJon") as! LocationCell
-        cell.mbusheListen(locations: obj.locationArray[indexPath.row], rating : ratingString ?? "4.2")
+                cell.mbusheListen(locations: sortedLocations[indexPath.row])
+                cell.updateDistancen(distance: distanceArray[indexPath.row])
+            if cell.fotoELokalit.image == nil {
+                cell.fotoELokalit.af_setImage(withURL: URL(string: sortedLocations[indexPath.row].updatePhoto())!)
+            }
         tableView.rowHeight = 120
         
-        return cell
+            
+            return cell}
+        else{ return UITableViewCell()}
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detailsVC", sender: obj.locationArray[indexPath.row])
+        performSegue(withIdentifier: "detailsVC", sender: sortedLocations[indexPath.row])
         
     }
     
@@ -166,7 +184,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return obj.locationArray.count
+        return sortedLocations.count
     }
 
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
@@ -196,10 +214,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 extension ViewController: CLLocationManagerDelegate {
          func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.first!
-            tableView.reloadData()
+        let location: CLLocation = locations.last!
+            distanceArray = []
         print("Locations : \(location)")
-
+            for index in obj.locationArray{
+            let locationDistance = CLLocation(latitude: index.latitude, longitude: index.longitude)
+            distanca = userCurrentLocation.distance(from: locationDistance)
+            let distancaNeKilometra = (distanca / 1000)
+            let roundDistance = String(format:"%.02f", distancaNeKilometra)
+            distanceArray.append(distanca)
+            
+                
+            }
+            distanceArray = distanceArray.sorted(by: <)
+            
+            sortedLocations = []
+            for index in distanceArray {
+                
+                
+                for cdex in obj.locationArray{
+                    print(index)
+                    
+                    let locationDistance = CLLocation(latitude: cdex.latitude, longitude: cdex.longitude)
+                    print(userCurrentLocation.distance(from: locationDistance))
+                    if userCurrentLocation.distance(from: locationDistance) == index{
+                        sortedLocations.append(cdex)
+                      print(sortedLocations)
+                        print("sadasdasdsadsdas")
+                        
+                    }
+                }
+            }
+            tableView.reloadData()
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
 //            _ = String(location.coordinate.latitude)
