@@ -15,7 +15,8 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var distanceLbl: UILabel!
     @IBOutlet weak var ratingLbl: UILabel!
     @IBOutlet weak var tipiLbl: UILabel!
-
+    @IBOutlet weak var ratingStars: CosmosView!
+    
     @IBOutlet weak var fotoELokalit: UIImageView!
     @IBOutlet weak var foto1: UIImageView!
     @IBOutlet weak var foto2: UIImageView!
@@ -42,6 +43,7 @@ class LocationCell: UITableViewCell {
         ratingLbl.text = locations.rating
         tipiLbl.text = locations.tipi
         fotoELokalit.image = UIImage(named: locations.foto)
+        ratingStars.rating = Double(locations.rating) ?? 0
         self.fotoELokalit.layer.masksToBounds = true
         if locations.perFemna == true{
             foto2.image = UIImage(named: "perFemna")
@@ -73,6 +75,7 @@ class LocationCell: UITableViewCell {
         }
     }
     func updateDistancen(distance: CLLocationDistance){
-        distanceLbl.text = String(format:"%.02f", distance/1000)
+        let formatDistance = String(format:"%.02f", distance/1000)
+        distanceLbl.text = formatDistance + "km"
     }
 }

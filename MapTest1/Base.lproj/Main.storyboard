@@ -26,6 +26,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7T-cn-4B3" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="61" width="375" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgk-dR-rhJ">
+                                        <rect key="frame" x="317" y="142" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="goButton"/>
+                                        <connections>
+                                            <action selector="showDirection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CFY-cN-5xm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="uU9-BS-DOz"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DR-dK-Jdf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Toilet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-90-1LH">
+                                        <rect key="frame" x="129.5" y="9" width="117" height="43"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="n7w-Z6-AXZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZe-Du-Pp2">
+                                        <rect key="frame" x="8" y="14" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="64e-1l-ldK"/>
+                                            <constraint firstAttribute="height" constant="33" id="wwj-pQ-ByR"/>
+                                        </constraints>
+                                        <state key="normal" image="Xbutton"/>
+                                        <connections>
+                                            <action selector="cancelDirection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ban-7t-seA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BHx-90-1LH" firstAttribute="centerX" secondItem="4DR-dK-Jdf" secondAttribute="centerX" id="DTS-7D-oKT"/>
+                                    <constraint firstItem="BHx-90-1LH" firstAttribute="top" secondItem="4DR-dK-Jdf" secondAttribute="top" constant="9" id="Wno-CI-Nu2"/>
+                                    <constraint firstAttribute="height" constant="61" id="eFR-Mb-aUt"/>
+                                    <constraint firstItem="xZe-Du-Pp2" firstAttribute="leading" secondItem="4DR-dK-Jdf" secondAttribute="leading" constant="8" id="o1K-HP-sHH"/>
+                                    <constraint firstItem="xZe-Du-Pp2" firstAttribute="centerY" secondItem="BHx-90-1LH" secondAttribute="centerY" id="wVU-03-i3y"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NND-up-kQ4">
                                 <rect key="frame" x="0.0" y="261" width="375" height="406"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,7 +89,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yG-DF-Urm">
-                                                    <rect key="frame" x="324.5" y="52.5" width="40.5" height="21"/>
+                                                    <rect key="frame" x="342.5" y="52.5" width="22.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="fRj-2m-5BA"/>
                                                     </constraints>
@@ -47,7 +98,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3M0-bt-pp4">
-                                                    <rect key="frame" x="90" y="16" width="34.5" height="20.5"/>
+                                                    <rect key="frame" x="90" y="16" width="35" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="q4P-WZ-hdW"/>
                                                     </constraints>
@@ -56,7 +107,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTb-pc-QK4">
-                                                    <rect key="frame" x="232" y="16" width="63" height="20.5"/>
+                                                    <rect key="frame" x="232.5" y="16" width="62.5" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="fPX-nl-uo7"/>
                                                     </constraints>
@@ -65,7 +116,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="283m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-gq-O3W">
-                                                    <rect key="frame" x="324.5" y="16" width="40.5" height="20.5"/>
+                                                    <rect key="frame" x="324" y="16" width="41" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="ChB-jR-t8o"/>
                                                     </constraints>
@@ -74,18 +125,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6h-wa-sb6">
-                                                    <rect key="frame" x="90" y="52.5" width="26" height="21"/>
+                                                    <rect key="frame" x="90" y="52.5" width="26.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="qk2-ND-b4P"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ratings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMi-Lm-uDv">
-                                                    <rect key="frame" x="232.5" y="52.5" width="62.5" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="m26-He-9lZ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -205,31 +247,47 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NTz-T7-0fS" customClass="CosmosView" customModule="MapTest1" customModuleProvider="target">
+                                                    <rect key="frame" x="216" y="48" width="79" height="30"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Ssa-9u-OLA"/>
+                                                        <constraint firstAttribute="width" constant="79" id="aqC-Qz-b4x"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                            <real key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="3M0-bt-pp4" firstAttribute="top" secondItem="AVk-98-qjf" secondAttribute="top" constant="16" id="49H-yp-wzt"/>
                                                 <constraint firstAttribute="trailing" secondItem="21Z-gq-O3W" secondAttribute="trailing" constant="10" id="7dN-xU-RP1"/>
                                                 <constraint firstItem="j6h-wa-sb6" firstAttribute="leading" secondItem="xFT-BF-VAP" secondAttribute="trailing" constant="8" id="8SP-9o-eFs"/>
-                                                <constraint firstItem="HTb-pc-QK4" firstAttribute="leading" secondItem="lMi-Lm-uDv" secondAttribute="leading" id="8og-k3-cgU"/>
                                                 <constraint firstItem="5r6-iB-pIS" firstAttribute="leading" secondItem="j6h-wa-sb6" secondAttribute="leading" id="DYd-Ce-uD0"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3M0-bt-pp4" secondAttribute="trailing" constant="20" symbolic="YES" id="F2N-z6-MuV"/>
                                                 <constraint firstItem="8yG-DF-Urm" firstAttribute="top" secondItem="21Z-gq-O3W" secondAttribute="bottom" constant="16" id="HVg-Sc-y5U"/>
+                                                <constraint firstItem="NTz-T7-0fS" firstAttribute="trailing" secondItem="HTb-pc-QK4" secondAttribute="trailing" id="M3l-vf-J2N"/>
                                                 <constraint firstItem="xFT-BF-VAP" firstAttribute="top" secondItem="AVk-98-qjf" secondAttribute="top" constant="16" id="O99-Ca-03N"/>
-                                                <constraint firstAttribute="trailing" secondItem="8yG-DF-Urm" secondAttribute="trailing" constant="10" id="PAM-WV-lXl"/>
+                                                <constraint firstItem="8yG-DF-Urm" firstAttribute="trailing" secondItem="21Z-gq-O3W" secondAttribute="trailing" id="Oe1-JS-arU"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j6h-wa-sb6" secondAttribute="trailing" constant="20" symbolic="YES" id="QyI-gh-aue"/>
-                                                <constraint firstAttribute="trailing" secondItem="lMi-Lm-uDv" secondAttribute="trailing" constant="80" id="YbL-Is-PVR"/>
                                                 <constraint firstItem="3M0-bt-pp4" firstAttribute="leading" secondItem="xFT-BF-VAP" secondAttribute="trailing" constant="8" id="bdp-7B-zZI"/>
-                                                <constraint firstItem="lMi-Lm-uDv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AVk-98-qjf" secondAttribute="leading" id="dso-8L-aw7"/>
                                                 <constraint firstItem="j6h-wa-sb6" firstAttribute="top" secondItem="3M0-bt-pp4" secondAttribute="bottom" constant="16" id="f6G-Z8-2un"/>
                                                 <constraint firstItem="21Z-gq-O3W" firstAttribute="top" secondItem="AVk-98-qjf" secondAttribute="top" constant="16" id="fZp-hO-A9B"/>
+                                                <constraint firstItem="NTz-T7-0fS" firstAttribute="centerY" secondItem="8yG-DF-Urm" secondAttribute="centerY" id="gag-8a-r6L"/>
                                                 <constraint firstItem="HTb-pc-QK4" firstAttribute="top" secondItem="AVk-98-qjf" secondAttribute="top" constant="16" id="jbp-9v-ltg"/>
                                                 <constraint firstItem="xFT-BF-VAP" firstAttribute="leading" secondItem="AVk-98-qjf" secondAttribute="leading" constant="8" id="lGa-fw-ndL"/>
                                                 <constraint firstItem="HTb-pc-QK4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AVk-98-qjf" secondAttribute="leading" id="n6I-Lw-GgC"/>
-                                                <constraint firstItem="lMi-Lm-uDv" firstAttribute="top" secondItem="HTb-pc-QK4" secondAttribute="bottom" constant="16" id="nwv-Ay-OXV"/>
                                                 <constraint firstItem="5r6-iB-pIS" firstAttribute="leading" secondItem="AVk-98-qjf" secondAttribute="leading" constant="90" id="pg3-yh-SQg"/>
                                                 <constraint firstAttribute="trailing" secondItem="HTb-pc-QK4" secondAttribute="trailing" constant="80" id="sDK-Px-DjE"/>
                                                 <constraint firstAttribute="bottom" secondItem="5r6-iB-pIS" secondAttribute="bottom" id="wv8-nB-GYr"/>
-                                                <constraint firstItem="8yG-DF-Urm" firstAttribute="centerX" secondItem="21Z-gq-O3W" secondAttribute="centerX" id="xis-k8-dZA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
@@ -251,49 +309,12 @@
                                             <outlet property="foto3" destination="svS-Jj-Kax" id="Red-fb-F2x"/>
                                             <outlet property="fotoELokalit" destination="xFT-BF-VAP" id="isa-LJ-gol"/>
                                             <outlet property="ratingLbl" destination="8yG-DF-Urm" id="ao7-63-MpL"/>
+                                            <outlet property="ratingStars" destination="NTz-T7-0fS" id="ijQ-YH-al6"/>
                                             <outlet property="tipiLbl" destination="j6h-wa-sb6" id="bED-cx-56X"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7T-cn-4B3" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="61" width="375" height="200"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgk-dR-rhJ">
-                                        <rect key="frame" x="317" y="142" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="goButton"/>
-                                        <connections>
-                                            <action selector="showDirection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CFY-cN-5xm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="uU9-BS-DOz"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DR-dK-Jdf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Toilet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-90-1LH">
-                                        <rect key="frame" x="131" y="9" width="113.5" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="43" id="n7w-Z6-AXZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="BHx-90-1LH" firstAttribute="centerX" secondItem="4DR-dK-Jdf" secondAttribute="centerX" id="DTS-7D-oKT"/>
-                                    <constraint firstItem="BHx-90-1LH" firstAttribute="top" secondItem="4DR-dK-Jdf" secondAttribute="top" constant="9" id="Wno-CI-Nu2"/>
-                                    <constraint firstAttribute="height" constant="61" id="eFR-Mb-aUt"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -311,6 +332,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="Xbutton" destination="xZe-Du-Pp2" id="ftE-Jy-lCF"/>
                         <outlet property="goButton" destination="jgk-dR-rhJ" id="hpk-LT-Zsd"/>
                         <outlet property="mapView" destination="b7T-cn-4B3" id="7eg-Qz-wTK"/>
                         <outlet property="tableView" destination="NND-up-kQ4" id="9J9-ka-1Gx"/>
@@ -350,7 +372,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ventilimi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-JS-NDS">
-                                                                <rect key="frame" x="16" y="14" width="67" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15.5" width="66" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -367,7 +389,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="3.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7Z-pB-3aw">
-                                                                <rect key="frame" x="28" y="14.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -416,7 +438,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Uje" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qam-0e-hB4">
-                                                                <rect key="frame" x="16" y="13.5" width="25" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="24.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -433,7 +455,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="3.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5A-So-aNi">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -478,7 +500,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Ndriqimi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33w-uV-PRi">
-                                                                <rect key="frame" x="16" y="13.5" width="65" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="64.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -495,7 +517,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="4.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Z-zS-LN3">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -540,7 +562,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letra Toaletit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWj-tt-i6i">
-                                                                <rect key="frame" x="16" y="13.5" width="101.5" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="99" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -557,7 +579,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="4.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbT-p5-Ww7">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -602,7 +624,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Pastertia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fg1-mP-xLQ">
-                                                                <rect key="frame" x="16" y="13.5" width="69.5" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="68.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -619,7 +641,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="4.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-Ez-4CZ">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -664,7 +686,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Koha e pritjes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toY-Hb-dch" userLabel="Koha e pritjes">
-                                                                <rect key="frame" x="16" y="13.5" width="105" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="103" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -681,7 +703,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="3.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcH-zB-7r5">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -726,7 +748,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shampon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMJ-aD-LbM" userLabel="Shampon">
-                                                                <rect key="frame" x="16" y="13.5" width="73.5" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="72.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -743,7 +765,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="4.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxN-GK-TSK">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -788,7 +810,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Komoditet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iz-Bq-Axh" userLabel="Komoditet">
-                                                                <rect key="frame" x="16" y="13.5" width="80" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="79" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -805,7 +827,7 @@
                                                         <rect key="frame" x="138" y="0.0" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="4.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYh-xo-AeK">
-                                                                <rect key="frame" x="28" y="13.5" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -850,7 +872,7 @@
                                                         <rect key="frame" x="0.0" y="0.5" width="128" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Higjiena" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-Xf-GCt" userLabel="Higjiena">
-                                                                <rect key="frame" x="16" y="13" width="63" height="22.5"/>
+                                                                <rect key="frame" x="16" y="15" width="62" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -867,7 +889,7 @@
                                                         <rect key="frame" x="138" y="0.5" width="80" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="4.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHh-Hv-uph">
-                                                                <rect key="frame" x="28" y="13" width="24" height="22.5"/>
+                                                                <rect key="frame" x="28" y="15" width="24" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -1033,6 +1055,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Xbutton" width="512" height="512"/>
         <image name="goButton" width="225" height="225"/>
         <image name="perFemna" width="128" height="128"/>
         <image name="perInvalid" width="128" height="128"/>

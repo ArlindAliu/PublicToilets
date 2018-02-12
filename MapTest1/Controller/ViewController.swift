@@ -15,7 +15,6 @@ import SwiftyJSON
 import AlamofireImage
 
 
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , GMSMapViewDelegate , RatingDelegate{
     
     @IBOutlet weak var animateMap: UIView!
@@ -23,9 +22,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var mapView: GMSMapView! 
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var Xbutton: UIButton!
+    @IBOutlet weak var ratingStarss: CosmosView!
     
     @IBOutlet weak var goButton: UIButton!
-    var ferr = false
+    var markerTapped = false
     var placePicker: GMSPlacePicker!
     var locationManager = CLLocationManager()
     var currentPlace : CLLocation?
@@ -37,8 +38,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var distanca = CLLocationDistance()
     var ratingString: String?
     var distanceArray = [CLLocationDistance()]
-    var userCurrentLocation = CLLocation(latitude: 42.654239, longitude: 21.157904)
+    var userCurrentLocation = CLLocation(latitude: 42.664878, longitude: 21.158634)
     var sortedLocations = [LocationModel]()
+    var polyline: GMSPolyline?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +65,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             marker.isTappable = true
             marker.map = self.mapView
             
-            
         }
         for index in obj.locationArray{
             let locationDistance = CLLocation(latitude: index.latitude, longitude: index.longitude)
@@ -73,26 +74,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let roundDistance = String(format:"%.02f", distancaNeKilometra)
             distanceArray.append(distanca)
             
-            
         }
          sortedLocations.append(contentsOf: obj.locationArray)
          goButton.frame = CGRect(x: 310, y: 160, width: 30, height: 30)
          self.view.addSubview(goButton)
          goButton.isHidden = true
+         Xbutton.isHidden = true
         print("\(sortedLocations) ciu ciucci uci uci cuciuci uc **************************")
+        
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        if ferr == false {
-       goButton.isHidden = false
-        
-     ferr = true
+        if markerTapped == false {
+         goButton.isHidden = false
+         Xbutton.isHidden = false
+         markerTapped = true
         } else {
            goButton.isHidden = true
-            ferr = false
+           Xbutton.isHidden = true
+            markerTapped = false
         }
         return true
+    }
+    @IBAction func cancelDirection(_ sender: Any) {
+        polyline?.map = nil
     }
     
     func getData(){
@@ -115,17 +121,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    @IBAction func showDirection(_ sender: Any) {
+    @IBAction func showDirection(_ sender: UIButton) {
+//        if sender.touchesEnded(Set<UITouch>, with: UIEvent?){
+//
+//        }
         getData()
     }
     func addPolyLine(encodedString: String) {
         
         let path = GMSMutablePath(fromEncodedPath: encodedString)
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 5
-        polyline.strokeColor = .blue
-        polyline.map = mapView
+        polyline = GMSPolyline(path: path)
+        polyline?.strokeWidth = 5
         
+        polyline?.strokeColor = .blue
+    
+        polyline?.map = mapView
     }
     func ratingValue(ratingTxt: String) {
         ratingString = ratingTxt
@@ -256,6 +266,7 @@ extension ViewController: CLLocationManagerDelegate {
             
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
+        mapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 0 , right: 0)
         mapView.settings.compassButton = true
         mapView.settings.accessibilityNavigationStyle = .combined
 
@@ -265,9 +276,7 @@ extension ViewController: CLLocationManagerDelegate {
         } else {
             mapView.animate(to: camera)
         }
-
     }
-
 }
 
 
