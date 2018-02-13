@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var Xbutton: UIButton!
     @IBOutlet weak var ratingStarss: CosmosView!
     
+    
     @IBOutlet weak var goButton: UIButton!
     var markerTapped = false
     var placePicker: GMSPlacePicker!
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var zoomLevel : Float = 15;
     var obj = Locations()
     var didTouched: Bool = false
-    let url = URL(string : "https://maps.googleapis.com/maps/api/directions/json?origin=42.654239,21.157108&destination=42.664760,21.157904&key=AIzaSyB5gTvTzQpq0-mkGS6LDceAnQKAU4FPPbY")
+   
     
     var distanca = CLLocationDistance()
     var ratingString: String?
@@ -41,7 +42,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var userCurrentLocation = CLLocation(latitude: 42.664878, longitude: 21.158634)
     var sortedLocations = [LocationModel]()
     var polyline: GMSPolyline?
-    
+    var markerLocation = [CLLocationCoordinate2D]()
+//    var latitude : CLLocationDegrees!
+//    var longitude: CLLocationDegrees!
+    var url: URL!
+//    var originLatitude: CLLocationDegrees!
+//    var originLongitude: CLLocationDegrees!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             marker.title = "\(obj.locationArray[index].emri)"
             marker.snippet = "\(obj.locationArray[index].tipi)"
             marker.isTappable = true
+            markerLocation.append(marker.position)
             marker.map = self.mapView
             
         }
@@ -71,7 +78,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             distanca = userCurrentLocation.distance(from: locationDistance)
             let distancaNeKilometra = (distanca / 1000)
-            let roundDistance = String(format:"%.02f", distancaNeKilometra)
+            _ = String(format:"%.02f", distancaNeKilometra)
             distanceArray.append(distanca)
             
         }
@@ -86,9 +93,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
+        let latitude = marker.position.latitude
+        let longitude = marker.position.longitude
+        print("Latiitude e markerit = \(latitude)")
+        print("Longitude e markerit = \(longitude)")
+        let originLatitude = 42.654239
+        let originLongitude = 21.157108
+        url = URL(string : "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLatitude),\(originLongitude)&destination=\(latitude),\(longitude)&key=AIzaSyB5gTvTzQpq0-mkGS6LDceAnQKAU4FPPbY")
+        
+//        for index in obj.locationArray{
+//            marker.title = index.emri
+//            marker.snippet = index.tipi
+//            marker.map = self.mapView
+//        }
         if markerTapped == false {
          goButton.isHidden = false
-         Xbutton.isHidden = false
+         
          markerTapped = true
         } else {
            goButton.isHidden = true
@@ -97,8 +117,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return true
     }
+    
     @IBAction func cancelDirection(_ sender: Any) {
         polyline?.map = nil
+         if self.polyline?.map == nil{
+            self.Xbutton.isHidden = true
+            
+        }
+        self.goButton.isHidden = true
     }
     
     func getData(){
@@ -116,7 +142,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let line  = polypoints
                 print("\(mapResponse) = MAP RESPONSE ")
                 self.addPolyLine(encodedString: line)
-                
+                if self.polyline?.map == self.mapView {
+                    self.Xbutton.isHidden = false
+                }
             }
         }
     }
@@ -157,10 +185,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         statusAuthorize()
+        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -173,7 +205,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.fotoELokalit.af_setImage(withURL: URL(string: sortedLocations[indexPath.row].updatePhoto())!)
             }
         tableView.rowHeight = 120
-        
+            
             
             return cell}
         else{ return UITableViewCell()}

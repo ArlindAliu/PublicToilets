@@ -17,12 +17,13 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var tipiLbl: UILabel!
     @IBOutlet weak var ratingStars: CosmosView!
     
+    @IBOutlet weak var bottomBorder: GradientView!
     @IBOutlet weak var fotoELokalit: UIImageView!
     @IBOutlet weak var foto1: UIImageView!
     @IBOutlet weak var foto2: UIImageView!
     @IBOutlet weak var foto3: UIImageView!
     
-    
+    var gradientLayer: CAGradientLayer!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -33,9 +34,18 @@ class LocationCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+//        createGradientLayer()
     }
     
+//    func createGradientLayer() {
+//        gradientLayer = CAGradientLayer()
+//
+//        gradientLayer.frame.size.width = self.bottomBorder.frame.size.width
+//
+//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
+//
+//        self.bottomBorder.layer.addSublayer(gradientLayer)
+//    }
     
     func mbusheListen(locations: LocationModel){
         emriLbl.text = locations.emri
