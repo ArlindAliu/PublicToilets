@@ -24,9 +24,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var Xbutton: UIButton!
     @IBOutlet weak var ratingStarss: CosmosView!
-    
-    
     @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var popupView: UIView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    @IBOutlet weak var popUpConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var settingsConstraint: NSLayoutConstraint!
+    
+    let languages: [String] = ["Shqip","English"]
     var markerTapped = false
     var placePicker: GMSPlacePicker!
     var locationManager = CLLocationManager()
@@ -62,6 +68,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         locationManager.delegate = self
         self.mapView.delegate = self
         
+        popupView.layer.cornerRadius = 10
+        popupView.layer.masksToBounds = true
+        pickerView.dataSource = self
+        pickerView.delegate = self
   
         for index in 0...(obj.locationArray.count - 1){
             let marker = GMSMarker()
@@ -308,6 +318,47 @@ extension ViewController: CLLocationManagerDelegate {
         } else {
             mapView.animate(to: camera)
         }
+    }
+}
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+  
+   
+    
+    @IBAction func showDropBar(_ sender: Any) {
+        settingsConstraint.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    @IBAction func showPickerView(_ sender: UIButton) {
+        popUpConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    @IBAction func closeButton(_ sender: Any) {
+        
+        popUpConstraint.constant = -400
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return languages[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return languages.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
     }
 }
 
