@@ -111,7 +111,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Toilet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-90-1LH">
-                                        <rect key="frame" x="129" y="9" width="117" height="43"/>
+                                        <rect key="frame" x="131.5" y="9" width="113.5" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="n7w-Z6-AXZ"/>
                                         </constraints>
@@ -176,7 +176,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3M0-bt-pp4">
-                                                    <rect key="frame" x="90" y="16" width="35" height="20.5"/>
+                                                    <rect key="frame" x="90" y="16" width="34.5" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="q4P-WZ-hdW"/>
                                                     </constraints>
@@ -185,7 +185,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTb-pc-QK4">
-                                                    <rect key="frame" x="232.5" y="16" width="62.5" height="20.5"/>
+                                                    <rect key="frame" x="232" y="16" width="63" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="fPX-nl-uo7"/>
                                                     </constraints>
@@ -194,7 +194,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="283m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-gq-O3W">
-                                                    <rect key="frame" x="324" y="16" width="41" height="20.5"/>
+                                                    <rect key="frame" x="324.5" y="16" width="40.5" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="ChB-jR-t8o"/>
                                                     </constraints>
@@ -203,7 +203,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6h-wa-sb6">
-                                                    <rect key="frame" x="90" y="52.5" width="26.5" height="21"/>
+                                                    <rect key="frame" x="90" y="52.5" width="26" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="qk2-ND-b4P"/>
                                                     </constraints>
@@ -1081,7 +1081,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Toilet " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3q-ze-YUA">
-                                        <rect key="frame" x="126.5" y="8" width="122.5" height="45"/>
+                                        <rect key="frame" x="127.5" y="8" width="120.5" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="64b-AY-dgF"/>
                                         </constraints>
